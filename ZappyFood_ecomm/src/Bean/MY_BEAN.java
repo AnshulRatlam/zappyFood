@@ -1,62 +1,57 @@
 package Bean;
 
 public class MY_BEAN {
+    Double productprice;
+	String category , productname ,productdesc,filename;
+	int Sno;
 
-	String name;
-	String address,  email,  pass ;
-    int  uid,mob;
-    
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	public int getSno() {
+		return Sno;
 	}
 
-	public String getName() {
-		return name;
+	public void setSno(int sno) {
+		Sno = sno;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public String getCategory() {
+		return category;
 	}
 
-	public String getAddress() {
-		return address;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public String getProductname() {
+		return productname;
 	}
 
-	public String getEmail() {
-		return email;
+	public void setProductname(String productname) {
+		this.productname = productname;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	
+
+	public Double getProductprice() {
+		return productprice;
 	}
 
-	public String getPass() {
-		return pass;
+	public void setProductprice(Double productprice) {
+		this.productprice = productprice;
 	}
 
-	public void setPass(String pass) {
-		this.pass = pass;
+	public String getProductdesc() {
+		return productdesc;
 	}
 
-	public int getUid() {
-		return uid;
+	public void setProductdesc(String productdesc) {
+		this.productdesc = productdesc;
 	}
 
-	public void setUid(int uid) {
-		this.uid = uid;
+	public String getFilename() {
+		return filename;
 	}
 
-	public int getMob() {
-		return mob;
+	public void setFilename(String filename) {
+		this.filename = filename;
 	}
-
-	public void setMob(int mob) {
-		this.mob = mob;
-	}
-
 }

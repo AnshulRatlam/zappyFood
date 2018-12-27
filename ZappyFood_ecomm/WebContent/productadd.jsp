@@ -18,7 +18,7 @@ String m = (String)request.getAttribute("msg") ;
 if (m!=null)
 {
 	%>
-	<div class="alert alert-danger alert-dismissible col-xs-4">
+	<div class="alert  alert-success col-xs-4">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
     <strong><%= m %></strong> 
   </div>

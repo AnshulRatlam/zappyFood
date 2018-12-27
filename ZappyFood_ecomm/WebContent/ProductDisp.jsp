@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@page import="java.sql.*" %>
+<%@page import="java.util.ArrayList,Bean.MY_BEAN" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,18 +14,18 @@
 <body>
 
 <%@include file="header.jsp" %>
+<% 
+	  	String uid=(String)session.getAttribute("uid");
+     if(uid==null)
+      {
+      
+    	 response.sendRedirect("index.jsp");
+      
+     }
+	   %>
 
+       ${msg}
 
-
-<%
-
-try {
-	  Class.forName("com.mysql.jdbc.Driver");
-	  Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/foodecom","root","root");
-
-	  PreparedStatement ps=con.prepareStatement("select  * from itemcollection");
-	  ResultSet rs=ps.executeQuery();
-	  %>
 	  <div class="container">
 	  <table class="table table-striped">
 	  <tr>
@@ -34,33 +35,39 @@ try {
 	  <th scope="col">PRICE</th>
 	  <th scope="col">DESCRIPTION</th>
 	  <th scope="col">IMAGE</th>
+	  <th scope="col">Update</th>
+	  <th scope="col">Delete</th>
+	  <th scope="col">IMAGE Update</th>
 	  </tr>
-	  <%
-	  while(rs.next())
-	  {
-		  %>
-		      <tr scope="row">
-		      <td ><%=rs.getString("Sno")%></td>
-		        <td><%=rs.getString("Category")%></td>
-		        <td><%=rs.getString("Product_name")%></td>
-		        <td><%=rs.getString("price")%></td>
-		         <td><%=rs.getString("Discription")%></td>
-		        <td><img src="imgupload/<%=rs.getString("image")%>" height="100" width="100"/></td>
-		        </tr>
-		  <%
-	  }
+	 
+	 <% 
+ ArrayList<MY_BEAN> list=(ArrayList<MY_BEAN>)request.getAttribute("LIST");
+ 
+ %>
+ 
+ <%
+   for(MY_BEAN ee:list)
+   {
 	  %>
+   	 <tr>
+   	<td scope="row"> <%=ee.getSno()%> </td>
+	<td scope="row"> <%=ee.getCategory() %>  </td>
+	 <td scope="row"><%=ee.getProductname()  %> </td>
+	 <td scope="row"><%=ee.getProductprice() %></td>
+	 <td scope="row"><%=ee.getProductdesc() %> </td>
+	 <td><img src="imgupload/<%=ee.getFilename()%>" height="100" width="100"/> </td>
+	 <td > <a href="UpdateProduct.jsp" class="glyphicon glyphicon-edit"></a></td>
+	 <td><a href="deleteProduct?pid=<%=ee.getSno()%>" class="glyphicon glyphicon-remove-sign" onClick="return confirm('Do you really want to delete this record?')"></a></td>
+	 <td><a href="#" class="glyphicon glyphicon-camera"></a></td>
+	 <tr/>
+	 <%
+	 }
+  %>
+	 
 	  </table>
 	  </div>
-	  <%
 	  
-	  con.close();
-}catch(Exception e)
-{
-	  System.out.println(e);
-}
-
-%>
+	  
 
 </body>
 </html>

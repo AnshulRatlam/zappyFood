@@ -3,9 +3,7 @@ package Admin;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,6 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import Bean.MY_BEAN;
+
+import dao.my_dao;
 
 /**
  * Servlet implementation class UploadProduct
@@ -87,7 +89,8 @@ String category=null;
  
  while ( i.hasNext())
  {
-
+	 
+		
     FileItem fi = (FileItem)i.next();
     if ( fi.isFormField () )
     {
@@ -144,33 +147,26 @@ String category=null;
        }
     }
  }
-
-
- try {
-	    Class.forName("com.mysql.jdbc.Driver");
-		Connection	 con=DriverManager.getConnection("jdbc:mysql://localhost:3306/foodecom","root","root");
-
-	  PreparedStatement ps=con.prepareStatement("insert into itemcollection(Category,Product_name,price,Discription,image) value(?,?,?,?,?)");//placeholder
-	  ps.setString(1, category); 
-	  ps.setString(2,productname);
-	    ps.setString(3,productprice);
-	    ps.setString(4,productdesc);
-	    ps.setString(5,filename);
-	    int y=0;y=ps.executeUpdate();
-	    if(y!=0)
+     MY_BEAN b=new MY_BEAN();
+	
+	//b.setEid(Integer.parseInt(eid));
+	b.setCategory(category);
+	b.setFilename(filename);
+	b.setProductdesc(productdesc);;
+	b.setProductname(productname);
+	b.setProductprice(Double.parseDouble(productprice));
+	
+      my_dao m = new my_dao();
+      
+      int y = m.insertProduct(b);
+ 	    if(y!=0)
 	    {
 	    	RequestDispatcher rd=request.getRequestDispatcher("productadd.jsp");
-		request.setAttribute("msg","uploaded successfully...");
+		request.setAttribute("msg","product add successfully..");
 		rd.forward(request,response);
 	    	//out.println("uploaded successfully...");
        
 	    }
-	    
-	    con.close();
- }catch(Exception e)
- {
-	  System.out.println(e);
- }
 
 
 }catch(Exception ex)

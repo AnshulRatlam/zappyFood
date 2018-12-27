@@ -12,12 +12,12 @@ response.addHeader("expire", "0");
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Zappy Food Management</a>
+      <a class="navbar-brand" href="admin/Admin_panel.jsp">Zappy Food Management</a>
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="Admin_panel.jsp">Home</a></li>
       <li><a href="productadd.jsp">Add Product</a></li>
-      <li><a href="ProductDisp.jsp">View Product Detail</a></li>
+      <li><a href="viewProduct">View Product Detail</a></li>
       
     </ul>
     <ul class="nav navbar-nav navbar-right">
