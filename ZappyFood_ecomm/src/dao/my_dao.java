@@ -133,7 +133,61 @@ public class my_dao {
 		return x;
 	}
 
+	public  MY_BEAN getproductDetailsBypid(int pid)
+	{
+		MY_BEAN e=new MY_BEAN();
+		try {
+		Connection con= Start();
+			PreparedStatement ps=con.prepareStatement("select  * from itemcollection where Sno=?");
+			ps.setInt(1,pid);
+			ResultSet rs=ps.executeQuery();
+			if(rs.next())
+			{ 
+				
+				e.setSno(rs.getInt("Sno"));
+				e.setCategory(rs.getString("Category"));
+				
+				e.setProductdesc(rs.getString("Discription"));
+				e.setProductname(rs.getString("Product_name"));
+				e.setProductprice(rs.getDouble("price"));
+			
+		     }
+			con.close();
+		}catch( SQLException w)
+			{
+			  System.out.println(w);
+			}
+		System.out.println(e);
+	return e;
+		
+	}
+	public int updateproduct(MY_BEAN e)
+	{
+		int x=0;
+		
+		try {
 
+			
+			
+			Connection con= Start();
+			PreparedStatement ps=con.prepareStatement("update itemcollection set Product_name=?,price=?,Discription=?,Category=? where Sno=?");
+			ps.setInt(5,e.getSno());
+			ps.setString(1,e.getProductname());
+			ps.setDouble(2, e.getProductprice());
+			ps.setString(3, e.getProductdesc());
+			ps.setString(4, e.getCategory());
+			x= ps.executeUpdate();
+			
+			
+	       con.close();
+		}catch(SQLException w)
+			{
+			  System.out.println(w);
+			}
+		
+		return x;
+	}
+	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

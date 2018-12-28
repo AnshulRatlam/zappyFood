@@ -56,7 +56,7 @@
 	 <td scope="row"><%=ee.getProductprice() %></td>
 	 <td scope="row"><%=ee.getProductdesc() %> </td>
 	 <td><img src="imgupload/<%=ee.getFilename()%>" height="100" width="100"/> </td>
-	 <td > <a href="UpdateProduct.jsp" class="glyphicon glyphicon-edit"></a></td>
+	 <td > <a href="ProductUpdate?pid=<%=ee.getSno()%>" class="glyphicon glyphicon-edit"></a></td>
 	 <td><a href="deleteProduct?pid=<%=ee.getSno()%>" class="glyphicon glyphicon-remove-sign" onClick="return confirm('Do you really want to delete this record?')"></a></td>
 	 <td><a href="#" class="glyphicon glyphicon-camera"></a></td>
 	 <tr/>
