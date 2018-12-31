@@ -161,6 +161,34 @@ public class my_dao {
 	return e;
 		
 	}
+	public  MY_BEAN getproductImageBypid(int pid)
+	{
+		MY_BEAN e=new MY_BEAN();
+		try {
+		Connection con= Start();
+			PreparedStatement ps=con.prepareStatement("select  * from itemcollection where Sno=?");
+			ps.setInt(1,pid);
+			ResultSet rs=ps.executeQuery();
+			if(rs.next())
+			{ 
+				
+				e.setSno(rs.getInt("Sno"));
+				e.setCategory(rs.getString("Category"));
+				e.setFilename(rs.getString("image"));
+				e.setProductdesc(rs.getString("Discription"));
+				e.setProductname(rs.getString("Product_name"));
+				e.setProductprice(rs.getDouble("price"));
+			
+		     }
+			con.close();
+		}catch( SQLException w)
+			{
+			  System.out.println(w);
+			}
+		System.out.println(e);
+	return e;
+		
+	}
 	public int updateproduct(MY_BEAN e)
 	{
 		int x=0;
@@ -188,6 +216,29 @@ public class my_dao {
 		return x;
 	}
 	
+	 public int updateProductImage(MY_BEAN B)
+     {
+    	 int y=0;
+    	 try {
+    		    Class.forName("com.mysql.jdbc.Driver");
+    			Connection	 con=DriverManager.getConnection("jdbc:mysql://localhost:3306/foodecom","root","root");
+
+    		  PreparedStatement ps=con.prepareStatement("update itemcollection set image=? where Sno=?");//placeholder
+    		  
+    		    
+    		    ps.setString(1,B.getFilename());
+    		    ps.setInt(2,B.getSno());
+    		    y=ps.executeUpdate();
+    		    
+    		    System.out.println(ps);
+    		    con.close();
+    	 }catch(Exception e)
+    	 {
+    		  System.out.println(e);
+    	 }
+    		return y;
+    	}
+    
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

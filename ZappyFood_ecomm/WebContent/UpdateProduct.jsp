@@ -46,7 +46,7 @@ MY_BEAN e=(MY_BEAN)request.getAttribute("pid");
   <div class="form-group">
     <label for="pwd">Select Category:</label>
     
-                           <select class="form-control" value="<%=e.getProductname()%>"  name="category">
+                           <select class="form-control" value="<%=e.getCategory()%>"  name="category">
   
 								    <option value="ready to cook">ready to cook</option>
 								    <option value="ready to eat">ready to eat</option>
