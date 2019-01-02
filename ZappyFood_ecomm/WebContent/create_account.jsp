@@ -15,7 +15,7 @@
 if(uid==null)
 {
 
-	 response.sendRedirect("admin/index.jsp");
+	 response.sendRedirect("index.jsp");
 
 }
 	   %>
