@@ -1,23 +1,29 @@
-package Admin;
+package customer;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import dao.Dao_Customer;
+import dao.my_dao;
 
 /**
- * Servlet implementation class productImageServlet
+ * Servlet implementation class custloginchek
  */
-@WebServlet("/productImageServlet")
-public class productImageServlet extends HttpServlet {
+@WebServlet("/custloginchek")
+public class custloginchek extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public productImageServlet() {
+    public custloginchek() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,6 +42,29 @@ public class productImageServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+		
+		String u=request.getParameter("name");
+		String p=request.getParameter("psw");
+	     Dao_Customer m=new Dao_Customer();
+	     
+	     int x=m.logincheck(u, p);
+		if(x==1)
+		{
+		   //Session code here
+			HttpSession session=request.getSession();
+			session.setAttribute("uid",u);
+			response.sendRedirect("index1.jsp");
+			
+		}
+		else {
+			RequestDispatcher rd=request.getRequestDispatcher("login.jsp");
+			request.setAttribute("msg","Login fail try again...");
+			rd.forward(request,response);
+			  //response.sendRedirect("index.jsp");
+		}
+		
+	}
+	
 	}
 
-}
+

@@ -26,8 +26,8 @@
                                                     </li>
                                                     <li><a href="#">about us </a> </li>
                                                     <li><a href="#">cart</a>  </li>
-                                                    <li><a href="login.jsp">login</a>  </li>
-                                                    <li><a href="custsignup.jsp">Register</a>  </li>
+                                                    <li><a href="custlogout.jsp">logout</a>  </li>
+                                                    <li><a href="#">My Account</a>  </li>
                                                     
                                                   <%--
                                                     <li class="mega_parent"><a href="#">Pages <i class="fa fa-angle-down"></i></a>

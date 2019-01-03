@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Bean.MY_BEAN;
-import dao.my_dao;
+import dao.Dao_Customer;
+
 
 /**
  * Servlet implementation class viewproductIndex
@@ -36,14 +37,22 @@ public class viewproductIndex extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		
-		my_dao m=new my_dao();
+		Dao_Customer m=new Dao_Customer();
 		  
 		  
-		  ArrayList<MY_BEAN> list= m.viewproduct();
+		  ArrayList<MY_BEAN> list1= m.viewproductreadytocook();
 
-	      RequestDispatcher rd=request.getRequestDispatcher("Custindex.jsp");
-	     request.setAttribute("LIST", list);
-	      rd.forward(request, response);
+	     request.setAttribute("LIST1", list1);
+	      
+	      ArrayList<MY_BEAN> list2= m.viewproductreadytodrink();
+
+	     request.setAttribute("LIST2", list2);
+	      
+	      ArrayList<MY_BEAN> list3= m.viewproductreadytoeat();
+
+	      RequestDispatcher rd3=request.getRequestDispatcher("Custindex.jsp");
+	     request.setAttribute("LIST3", list3);
+	      rd3.forward(request, response);
 	}
 
 	/**

@@ -10,9 +10,15 @@
                                             <a href="#"><img src="assets/img/logo/logo_footer.png" alt=""></a>
                                         </div>
                                         <div class="footer_content">
-                                            <p>Address: 123 Main Street, Anytown, CA 12345 - USA.</p>
-                                            <p>Phone: +(000) 800 456 789</p>
-                                            <p>Email: Contact@posthemes.com</p>
+                                        
+                                       
+
+
+
+                                            <p>Address:  Anand Bhog Foods Pvt Ltd., 104, 1st floor,CST road, Near BMC
+                                             'L' ward Office,Buddh Colony, Station Road,Kurla West, Mumbai-</p>
+                                            <p>7509084792 (Mon-Sat 9am to 6pm)</p>
+                                            <p>Email:feedback@zappyfoods.in</p>
                                         </div>
                                         <div class="footer_social">
                                             <h4>Get in Touch:</h4>
@@ -108,7 +114,7 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-xs-12">
                                     <div class="copyright_text">
-                                        <p>Copyright 2018 <a href="#">Organicfood</a>. All Rights Reserved</p>
+                                        <p>Copyright 2019 <a href="#">Zappy Food</a>. All Rights Reserved</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-xs-12">

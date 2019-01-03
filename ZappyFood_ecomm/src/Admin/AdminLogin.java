@@ -56,7 +56,7 @@ public class AdminLogin extends HttpServlet {
 			
 		}
 		else {
-			RequestDispatcher rd=request.getRequestDispatcher("admin/index.jsp");
+			RequestDispatcher rd=request.getRequestDispatcher("index.jsp");
 			request.setAttribute("msg","Login fail try again...");
 			rd.forward(request,response);
 			  //response.sendRedirect("index.jsp");
