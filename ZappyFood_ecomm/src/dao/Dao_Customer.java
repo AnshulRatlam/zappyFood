@@ -7,8 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import Bean.Bean_Customer;
 import Bean.MY_BEAN;
+import Bean.cart_bean;
 import Bean.view_cart;
 
 
@@ -210,6 +213,38 @@ public class Dao_Customer {
 	    	 }
 	    		return y;
 	    	}
+	  public ArrayList<cart_bean>  viewcart(String user)
+		{
+			ArrayList<cart_bean> list=new ArrayList<>();
+			
+			try {
+				Connection con = Start();
+				
+				PreparedStatement ps=con.prepareStatement("SELECT i.image,v.quantity, i.Product_name, i.price FROM itemcollection i , view_cart v WHERE v.pid=i.Sno And v.user= ?");
+				ps.setString(1, user);
+				ResultSet rs=ps.executeQuery();
+				
+				
+				while(rs.next())
+				{ 
+					cart_bean e=new cart_bean();
+					
+					
+					e.setFilename(rs.getString(1));
+					e.setQuantity(rs.getInt(2));
+					e.setProductname(rs.getString(3));
+					e.setProductprice(rs.getDouble(4));
+					
+					list.add(e);
+			     }
+				con.close();
+			}catch( SQLException w)
+				{
+				  System.out.println(w);
+				}
+		return list;
+			
+		}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

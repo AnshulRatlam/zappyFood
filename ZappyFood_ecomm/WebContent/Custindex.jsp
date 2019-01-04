@@ -14,6 +14,7 @@
     <body>
     <% 
 	  	String uid=(String)session.getAttribute("uid");
+    String m = (String)request.getAttribute("msg") ;
         if(uid==null)
        {%>
          <!-- Add your site or application content here -->
@@ -39,8 +40,7 @@
 	   
 	   <%@include file="Custheaduser.jsp" %>
         <%} %>
-           
-                <!--Banner area start-->
+              <!--Banner area start-->
                 <div class="banner_area home1_banner mt-30">
                     <div class="container-fluid">
                         <div class="row">
@@ -69,6 +69,16 @@
                     </div>
                 </div>
                 <!--Banner area end-->
+                
+              <% if (m!=null)
+{
+	%> 
+                
+	<div class="alert alert-success alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong><%= m %></strong> 
+  </div>
+	<%} %>
                 
                 <!--Features product area-->
                                 <div class="features_product pt-90">
@@ -112,17 +122,22 @@
 			                                                                    </div>
 			
 			                                                                    <div class="product__hover">
-			                                                                        <ul>
-			                                                                        <li><input type="hidden" name="pid" value= <%=ee.getSno()%> /></li>
 			                                                                        
-			                                                                       <li> <div class="cart-plus-minus">
-			                                                                       
-                                                                    <input type="text" value="02" name="quantity" class="cart-plus-minus-box">
-                                                                </div></li>
-                                                                                          <li><a href="./addtocart"><i class="ion-android-cart"></i></a></li>
-			                                                                            <li><a class="cart-fore" href="#" data-toggle="modal" data-target="#my_modal"  title="Quick View" ><i class="ion-android-open"></i></a></li>
-			                                                                            <li><a href="product-details.html"><i class="ion-clipboard"></i></a></li>
-			                                                                        </ul>
+			                                                                         <form  action="./addtocart">
+			                                                                        <div class="quickview_plus_minus">
+			                                                                        <input type="hidden" name="pid" value=<%=ee.getSno()%> />
+                                                            <span class="control_label">Quantity</span>
+                                                            <div class="quickview_plus_minus_inner">
+                                                                <div class="cart-plus-minus">
+                                                                    <input type="text" value="1" name="quantity" class="cart-plus-minus-box">
+                                                                </div>
+                                                               <div class="add_button add_modal">
+                                                                    <button type="submit"> Add to cart</button> 
+                                                                </div>
+                                                            </div>    
+                                                        </div> 
+			                                                          </form>              
+			                                                                        
 			                                                                    </div>
 			                                                                </div>
 			                                                            </div>

@@ -2,6 +2,7 @@ package customer;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import Bean.Bean_Customer;
+import Bean.MY_BEAN;
 import Bean.view_cart;
 import dao.Dao_Customer;
 
@@ -41,66 +43,51 @@ public class addtocart extends HttpServlet {
 		String quantity = request.getParameter("quantity");
 		HttpSession session=request.getSession();
 		String user = (String)session.getAttribute("uid");
-		
+		PrintWriter out=response.getWriter();
       view_cart b = new view_cart();
 		
 		
 		Dao_Customer m = new Dao_Customer();
 		
-		if(user==null)
-		{
-			user=request.getRemoteAddr();
-			
-			b.setPid(Integer.parseInt(pid));
-			b.setQuantity(Integer.parseInt(quantity));
-			b.setUser(user);
-			int x= m.Addtocart(b);
-			
-			if(x==1)
-		         {
-				 
-		        	 RequestDispatcher rd=request.getRequestDispatcher("index1.jsp");
-	                request.setAttribute("msg", "item add Successfully...");
-	               rd.forward(request, response);
-	                PrintWriter out=response.getWriter();
-	  		    	 
-		         
-		         }
-		         else
-		         {
-		        	 RequestDispatcher rd=request.getRequestDispatcher("index1.jsp");
-	             request.setAttribute("msg", "Data Not Inserted Successfully...");
-	            rd.forward(request, response);
-		         }
-		}
-		if(user!=null)
-		{
-			b.setPid(Integer.parseInt(pid));
-			b.setQuantity(Integer.parseInt(quantity));
-			b.setUser(user);
-			int x= m.Addtocart(b);
-			
-			if(x==1)
-		         {
-				 
-		        	 RequestDispatcher rd=request.getRequestDispatcher("index1.jsp");
-	                request.setAttribute("msg", "item add Successfully...");
-	               rd.forward(request, response);
-	                PrintWriter out=response.getWriter();
-	  		    	 
-		         
-		         }
-		         else
-		         {
-		        	 RequestDispatcher rd=request.getRequestDispatcher("index1.jsp");
-	             request.setAttribute("msg", "Data Not Inserted Successfully...");
-	            rd.forward(request, response);
-		         }
-			
-		}
 		
-			
+		 if(user==null)
+		{
+			 out.println(user);
+			user=request.getRemoteAddr();
+		}
+		 
+		 	b.setPid(Integer.parseInt(pid));
+			b.setQuantity(Integer.parseInt(quantity));
+			b.setUser(user);
+			int x= m.Addtocart(b);
+			 //RequestDispatcher rd=request.getRequestDispatcher("index1.jsp");
+				
+				  
+				  
+				  ArrayList<MY_BEAN> list1= m.viewproductreadytocook();
 
+			     request.setAttribute("LIST1", list1);
+			      
+			      ArrayList<MY_BEAN> list2= m.viewproductreadytodrink();
+
+			     request.setAttribute("LIST2", list2);
+			      
+			      ArrayList<MY_BEAN> list3= m.viewproductreadytoeat();
+
+			      RequestDispatcher rd3=request.getRequestDispatcher("Custindex.jsp");
+			     request.setAttribute("LIST3", list3);
+			      
+			   if(x==1)
+			   {
+				   request.setAttribute("msg", "item add Successfully...");
+			   }
+	             else
+		         {
+	            	 request.setAttribute("msg", "Data Not Inserted Successfully...");
+		         }
+			   
+			   rd3.forward(request, response);	 
+	          
 	}
 
 

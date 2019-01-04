@@ -25,7 +25,7 @@
                                                         </ul>
                                                     </li>
                                                     <li><a href="#">about us </a> </li>
-                                                    <li><a href="#">cart</a>  </li>
+                                                    <li><a href="./view_cartservlet">cart</a>  </li>
                                                     <li><a href="login.jsp">login</a>  </li>
                                                     <li><a href="custsignup.jsp">Register</a>  </li>
                                                     
