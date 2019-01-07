@@ -86,7 +86,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="section_title text-center">
-                                    <h3> Ready To Eat  </h3>
+                                    <h3> Ready To Cook  </h3>
                                 </div>
                             </div>
                         </div>
@@ -108,7 +108,7 @@
 			                                                                <span class="new_badge">new</span>
 			                                                                <div class="product_img">
 			                                                                    <a href="#">
-			                                                                        <img src="imgupload/<%=ee.getFilename()%>" alt="">
+			                                                                        <img style=" padding:20%; " src="imgupload/<%=ee.getFilename()%>" alt="">
 			                                                                    </a>
 			                                                                </div>
 			                                                                <div class="product__content text-center">
@@ -202,11 +202,21 @@
 			                                                                    </div>
 			
 			                                                                    <div class="product__hover">
-			                                                                        <ul>
-                                                            <li><a href="./addtocart"><i class="ion-android-cart"></i></a></li>
-			                                                                            <li><a class="cart-fore" href="#" data-toggle="modal" data-target="#my_modal"  title="Quick View" ><i class="ion-android-open"></i></a></li>
-			                                                                            <li><a href="product-details.html"><i class="ion-clipboard"></i></a></li>
-			                                                                        </ul>
+			                                                                        
+			                                                                         <form  action="./addtocart">
+			                                                                        <div class="quickview_plus_minus">
+			                                                                        <input type="hidden" name="pid" value=<%=ee.getSno()%> />
+                                                            <span class="control_label">Quantity</span>
+                                                            <div class="quickview_plus_minus_inner">
+                                                                <div class="cart-plus-minus">
+                                                                    <input type="text" value="1" name="quantity" class="cart-plus-minus-box">
+                                                                </div>
+                                                               <div class="add_button add_modal">
+                                                                    <button type="submit"> Add to cart</button> 
+                                                                </div>
+                                                            </div>    
+                                                        </div> 
+			                                                          </form>         
 			                                                                    </div>
 			                                                                </div>
 			                                                            </div>
@@ -233,7 +243,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="section_title text-center">
-                                    <h3> Ready To cook  </h3>
+                                    <h3> Ready To Eat  </h3>
                                 </div>
                             </div>
                         </div>
@@ -255,7 +265,7 @@
 			                                                                <span class="new_badge">new</span>
 			                                                                <div class="product_img">
 			                                                                    <a href="#">
-			                                                                        <img src="imgupload/<%=ee.getFilename()%>" alt="">
+			                                                                        <img style=" padding:20%; " src="imgupload/<%=ee.getFilename()%>" alt="">
 			                                                                    </a>
 			                                                                </div>
 			                                                                <div class="product__content text-center">
@@ -269,11 +279,21 @@
 			                                                                    </div>
 			
 			                                                                    <div class="product__hover">
-			                                                                        <ul>
-                                                   <li><a href="#"><i class="ion-android-cart"></i></a></li>
-			                                                                            <li><a class="cart-fore" href="#" data-toggle="modal" data-target="#my_modal"  title="Quick View" ><i class="ion-android-open"></i></a></li>
-			                                                                            <li><a href="product-details.html"><i class="ion-clipboard"></i></a></li>
-			                                                                        </ul>
+			                                                                       
+			                                                                         <form  action="./addtocart">
+			                                                                        <div class="quickview_plus_minus">
+			                                                                        <input type="hidden" name="pid" value=<%=ee.getSno()%> />
+                                                            <span class="control_label">Quantity</span>
+                                                            <div class="quickview_plus_minus_inner">
+                                                                <div class="cart-plus-minus">
+                                                                    <input type="text" value="1" name="quantity" class="cart-plus-minus-box">
+                                                                </div>
+                                                               <div class="add_button add_modal">
+                                                                    <button type="submit"> Add to cart</button> 
+                                                                </div>
+                                                            </div>    
+                                                        </div> 
+			                                                          </form>         
 			                                                                    </div>
 			                                                                </div>
 			                                                            </div>

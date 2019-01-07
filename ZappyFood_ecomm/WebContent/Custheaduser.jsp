@@ -20,7 +20,7 @@
                                                 <ul>
                                                     <li class="active"><a href="index1.jsp">Home <i class="fa fa-angle-down"></i></a>
                                                         <ul class="sub_menu">
-                                                            <li><a href="index.jsp">Admin</a></li>
+                                                            <li><a href="Adminindex.jsp">Admin</a></li>
                                                             
                                                         </ul>
                                                     </li>
@@ -74,18 +74,17 @@
                                         <div class="mobile-menu d-lg-none">
                                             <nav>
                                                  <ul>
-                                                    <li class="active"><a href="index.html">Home</a>
+                                                    <li class="active"><a href="index1.jsp">Home</a>
                                                         <ul>
-                                                            <li><a href="index.html">Home Version 1</a></li>
-                                                            <li><a href="index-2.html">Home Version 2</a></li>
-                                                            <li><a href="index-3.html">Home Version 3</a></li>
-                                                            <li><a href="index-4.html">Home Version 4</a></li>
+                                                            <li><a href="Adminindex.jsp">Home Version 1</a></li>
+                                                            
                                                         </ul>
                                                     </li>
-                                                    <li><a href="about.html">about us </a></li>
-                                                    <li><a href="shop.html">shop</a>  </li>
-                                                    <li><a href="blog.html">Blog </a>
-                                                    </li>
+                                                    <li><a href="#">about us </a> </li>
+                                                    <li><a href="./view_cartservlet">cart</a>  </li>
+                                                    <li><a href="custlogout.jsp">logout</a>  </li>
+                                                    <li><a href="#">My Account</a>  </li>
+                                                   <%-- 
                                                     <li><a href="#">Pages</a>
                                                         <ul>
                                                             <li>
@@ -122,7 +121,7 @@
                                                             </li>
                                                         </ul>    
                                                     </li>
-                                                    <li><a href="#">vegetable</a></li>
+                                                    <li><a href="#">vegetable</a></li>--%>
                                                 </ul>
                                             </nav>
                                         </div>

@@ -1,3 +1,9 @@
+<%
+response.addHeader("pragma", "no-cache");
+response.addHeader("cache-control", "no-store");
+response.addHeader("expire", "0");
+
+%>
 <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>ZappyFood</title>

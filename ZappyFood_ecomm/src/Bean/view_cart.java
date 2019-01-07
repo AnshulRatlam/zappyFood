@@ -5,7 +5,11 @@ public class view_cart {
 	
 	
 	int pid,quantity;
+ 
+
 String user;
+
+
 
 public int getPid() {
 	return pid;

@@ -46,14 +46,16 @@ public class view_cartservlet extends HttpServlet {
 			user=request.getRemoteAddr();
 		}
 		
-			
+            			
 		  
 		  ArrayList<cart_bean> list= m.viewcart(user);
 
-	     
+	   ArrayList<cart_bean> listTotal = m.viewcartTotal(user);  
+	  
 	     
 	     RequestDispatcher rd3=request.getRequestDispatcher("viewcart.jsp");
 	     request.setAttribute("LIST", list);
+	     request.setAttribute("LISTTotal", listTotal);
 	      rd3.forward(request, response);
 	}
 

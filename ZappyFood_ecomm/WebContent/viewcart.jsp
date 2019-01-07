@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@page import="java.util.ArrayList,Bean.cart_bean" %>
+    <%@page import="java.util.ArrayList,Bean.cart_bean,dao.Dao_Customer" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -53,7 +53,9 @@ ON view_cart.pid=itemcollection.Sno WHERE view_cart.user= 'the';
  ArrayList<cart_bean> list=(ArrayList<cart_bean>)request.getAttribute("LIST");
  
  %>
- 
+  <% 
+ ArrayList<cart_bean> listTotal=(ArrayList<cart_bean>)request.getAttribute("LISTTotal");
+  %>
                                                     
                             <form action="#">  
                                 <div class="table-content table-responsive">
@@ -110,14 +112,16 @@ ON view_cart.pid=itemcollection.Sno WHERE view_cart.user= 'the';
                                     <div class="col-lg-5 col-sm-5 col-md-5">
                                          <div class="cart_totals  text-right">
                                             <h2>Cart Totals</h2>
-                                            <div class="cart-subtotal">
-                                                <span>Subtotal</span>    
-                                                <span>£215.00</span>    
-                                            </div>
+                                            <% 
+                                            for(cart_bean ee:listTotal)
+														   {
+															  %>
+                                            
                                             <div class="order-total">
                                                 <span><strong>Total</strong> </span>          
-                                                <span><strong>£215.00 </strong> </span>
+                                                <span><strong><%=ee.getTotal() %></strong> </span>
                                             </div>
+                                            <%} %>
                                             <div class="wc-proceed-to-checkout">
                                                 <a href="#">Proceed to Checkout</a>
                                             </div>

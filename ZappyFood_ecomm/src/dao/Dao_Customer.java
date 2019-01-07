@@ -245,6 +245,36 @@ public class Dao_Customer {
 		return list;
 			
 		}
+	  
+	  public ArrayList<cart_bean>  viewcartTotal(String user)
+		{
+			ArrayList<cart_bean> list=new ArrayList<>();
+			cart_bean e=new cart_bean();
+			
+			
+			 try {
+				Connection con = Start();
+				
+				PreparedStatement ps=con.prepareStatement("SELECT Sum(v.quantity*i.price) FROM itemcollection i , view_cart v WHERE v.pid=i.Sno And v.user= ?");
+				ps.setString(1, user);
+				ResultSet rs=ps.executeQuery();
+					
+				
+				if(rs.next())
+				{ 
+				     e.setTotal(rs.getInt("Sum(v.quantity*i.price)"));
+					 list.add(e);
+			     }
+				
+				
+				con.close();
+			}catch( SQLException w)
+				{
+				  System.out.println(w);
+				}
+		 return  list;
+		 
+		}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
