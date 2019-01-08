@@ -18,7 +18,7 @@
                                         <div class="menu">
                                             <nav>
                                                 <ul>
-                                                    <li class="active"><a href="index1.jsp">Home <i class="fa fa-angle-down"></i></a>
+                                                    <li class="active"><a href="index.jsp">Home <i class="fa fa-angle-down"></i></a>
                                                         <ul class="sub_menu">
                                                             <li><a href="Adminindex.jsp">Admin</a></li>
                                                             
@@ -74,7 +74,7 @@
                                         <div class="mobile-menu d-lg-none">
                                             <nav>
                                                  <ul>
-                                                    <li class="active"><a href="index1.jsp">Home</a>
+                                                    <li class="active"><a href="index.jsp">Home</a>
                                                         <ul>
                                                             <li><a href="Adminindex.jsp">Admin</a></li>
                                                            
@@ -141,9 +141,9 @@
                                                     <a href="#">
                                                         <span class="cart_icon_inner">
                                                             <i class="ion-android-cart"></i>
-                                                            <span class="cart_count">2</span>
+                                                            <span class="cart_count">${count}</span>
                                                         </span>
-                                                        <span class="item_total">$65.00</span>
+                                                        <span class="item_total">Rs</span>
                                                     </a>
                                                 </div>
                                                 <!--Mini Cart Box-->

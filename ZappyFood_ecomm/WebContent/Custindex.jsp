@@ -15,6 +15,7 @@
     <% 
 	  	String uid=(String)session.getAttribute("uid");
     String m = (String)request.getAttribute("msg") ;
+    String count = (String)request.getAttribute(" count");
         if(uid==null)
        {%>
          <!-- Add your site or application content here -->
@@ -107,7 +108,7 @@
 			                                                            <div class="single_product__inner">
 			                                                                <span class="new_badge">new</span>
 			                                                                <div class="product_img">
-			                                                                    <a href="#">
+			                                                                    <a href="productdiscriptionservlet?pid=<%=ee.getSno()%>">
 			                                                                        <img style=" padding:20%; " src="imgupload/<%=ee.getFilename()%>" alt="">
 			                                                                    </a>
 			                                                                </div>
@@ -187,7 +188,8 @@
 			                                                            <div class="single_product__inner">
 			                                                                <span class="new_badge">new</span>
 			                                                                <div class="product_img">
-			                                                                    <a href="#">
+			                                                                 <a href="productdiscriptionservlet?pid=<%=ee.getSno()%>">
+			                                                                 
 			                                                                        <img src="imgupload/<%=ee.getFilename()%>" alt="">
 			                                                                    </a>
 			                                                                </div>
@@ -264,7 +266,7 @@
 			                                                            <div class="single_product__inner">
 			                                                                <span class="new_badge">new</span>
 			                                                                <div class="product_img">
-			                                                                    <a href="#">
+			                                                                  <a href="productdiscriptionservlet?pid=<%=ee.getSno()%>">
 			                                                                        <img style=" padding:20%; " src="imgupload/<%=ee.getFilename()%>" alt="">
 			                                                                    </a>
 			                                                                </div>

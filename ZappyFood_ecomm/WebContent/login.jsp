@@ -11,6 +11,7 @@
 
   <div class="page_login_section">
                 <div class="container">
+                    ${msg}
                     <div class="row">
                         <div class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1">
                             <div class="login_page_form">

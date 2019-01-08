@@ -275,7 +275,87 @@ public class Dao_Customer {
 		 return  list;
 		 
 		}
-
+	  public int cartcount(String user)
+	  {
+		  int count=0;
+			
+			
+			 try {
+				Connection con = Start();
+				
+				PreparedStatement ps=con.prepareStatement("SELECT COUNT(*) FROM view_cart WHERE user=?");
+				ps.setString(1, user);
+				ResultSet rs=ps.executeQuery();
+					
+				
+				if(rs.next())
+				{ 
+				    count=(rs.getInt("COUNT(*)"));
+					 
+			     }
+				
+				
+				con.close();
+			}catch( SQLException w)
+				{
+				  System.out.println(w);
+				}
+		 return  count;
+		
+		  
+	  }
+	  
+	  public int cartupdate(String user , String IP)
+	  {
+		  int x=0;
+		  try {
+			  
+			  Connection con = Start();
+				
+				PreparedStatement ps=con.prepareStatement("UPDATE view_cart SET user=? WHERE user=?");
+				ps.setString(1, user);
+				ps.setString(2, IP);
+				x=ps.executeUpdate();
+				System.out.println(ps);
+				con.close();
+			}catch( SQLException w)
+				{
+				  System.out.println(w);
+				}
+		 return  x;
+		  
+	  }
+	 public ArrayList<MY_BEAN> ProductDriscption(int pid)
+	 {
+		 ArrayList<MY_BEAN> list2=new ArrayList<>();
+			try {
+				Connection con = Start();
+				
+				PreparedStatement ps=con.prepareStatement("SELECT  * FROM itemcollection WHERE Sno = ?");
+				ps.setInt(1, pid);
+				
+				ResultSet rs=ps.executeQuery();
+				
+				while(rs.next())
+				{ 
+					MY_BEAN e=new MY_BEAN();
+					e.setSno(rs.getInt("Sno"));
+					e.setCategory(rs.getString("Category"));
+					e.setFilename(rs.getString("image"));
+					e.setProductdesc(rs.getString("Discription"));
+					e.setProductname(rs.getString("Product_name"));
+					e.setProductprice(rs.getDouble("price"));
+					
+					list2.add(e);
+			     }
+				con.close();
+			}catch( SQLException w)
+				{
+				  System.out.println(w);
+				}
+		return list2;
+		 
+	 }
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 

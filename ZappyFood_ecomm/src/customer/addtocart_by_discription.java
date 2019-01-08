@@ -12,22 +12,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import Bean.Bean_Customer;
 import Bean.MY_BEAN;
 import Bean.view_cart;
 import dao.Dao_Customer;
 
 /**
- * Servlet implementation class addtocart
+ * Servlet implementation class addtocart_by_discription
  */
-@WebServlet("/addtocart")
-public class addtocart extends HttpServlet {
+@WebServlet("/addtocart_by_discription")
+public class addtocart_by_discription extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public addtocart() {
+    public addtocart_by_discription() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,7 +36,7 @@ public class addtocart extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+
 		
 		String pid = request.getParameter("pid");
 		String quantity = request.getParameter("quantity");
@@ -67,20 +66,16 @@ public class addtocart extends HttpServlet {
 			int x= m.Addtocart(b);
 			 //RequestDispatcher rd=request.getRequestDispatcher("index1.jsp");
 				
+			
+	        
+		    
+	 	      ArrayList<MY_BEAN> list= m.ProductDriscption(Integer.parseInt(pid));
+	 	   RequestDispatcher rd=request.getRequestDispatcher("Productdiscription.jsp");
+	 	   request.setAttribute("LIST", list);
+			  //  request.setAttribute("msg","product: "+eid+ " deleted Successfully..");
+	 	   	  
 				  
-				  
-				  ArrayList<MY_BEAN> list1= m.viewproductreadytocook();
-
-			     request.setAttribute("LIST1", list1);
-			      
-			      ArrayList<MY_BEAN> list2= m.viewproductreadytodrink();
-
-			     request.setAttribute("LIST2", list2);
-			      
-			      ArrayList<MY_BEAN> list3= m.viewproductreadytoeat();
-
-			      RequestDispatcher rd3=request.getRequestDispatcher("Custindex.jsp");
-			     request.setAttribute("LIST3", list3);
+				 
 			      
 			   if(x==1)
 			   {
@@ -91,10 +86,9 @@ public class addtocart extends HttpServlet {
 	            	 request.setAttribute("msg", "Data Not Inserted Successfully...");
 		         }
 			   
-			   rd3.forward(request, response);	 
-	          
-	}
+			   rd.forward(request, response);   
 
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

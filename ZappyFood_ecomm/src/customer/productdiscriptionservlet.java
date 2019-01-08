@@ -9,23 +9,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import Bean.MY_BEAN;
 import dao.Dao_Customer;
-
+import dao.my_dao;
 
 /**
- * Servlet implementation class viewproductIndex
+ * Servlet implementation class productdiscriptionservlet
  */
-@WebServlet("/viewproductIndex")
-public class viewproductIndex extends HttpServlet {
+@WebServlet("/productdiscriptionservlet")
+public class productdiscriptionservlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public viewproductIndex() {
+    public productdiscriptionservlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,34 +35,18 @@ public class viewproductIndex extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		int count;
-		HttpSession session=request.getSession();
-		String user = (String)session.getAttribute("uid");
+		
 		
 		Dao_Customer m=new Dao_Customer();
-		         
-
-		if(user==null)
-		{
-			user=request.getRemoteAddr();
-		}
-		        count=m.cartcount(user);
-		
-				request.setAttribute("count", count);
-		  
-		  ArrayList<MY_BEAN> list1= m.viewproductreadytocook();
-
-	     request.setAttribute("LIST1", list1);
-	      
-	      ArrayList<MY_BEAN> list2= m.viewproductreadytodrink();
-
-	     request.setAttribute("LIST2", list2);
-	      
-	      ArrayList<MY_BEAN> list3= m.viewproductreadytoeat();
-
-	      RequestDispatcher rd3=request.getRequestDispatcher("Custindex.jsp");
-	     request.setAttribute("LIST3", list3);
-	      rd3.forward(request, response);
+	      int pid =Integer.parseInt(request.getParameter("pid"));
+        
+    
+ 	      ArrayList<MY_BEAN> list= m.ProductDriscption(pid);
+ 	   RequestDispatcher rd=request.getRequestDispatcher("Productdiscription.jsp");
+ 	   request.setAttribute("LIST", list);
+		  //  request.setAttribute("msg","product: "+eid+ " deleted Successfully..");
+ 	   rd.forward(request, response);
+    
 	}
 
 	/**

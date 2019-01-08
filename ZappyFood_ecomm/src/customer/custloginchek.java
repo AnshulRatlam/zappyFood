@@ -1,6 +1,7 @@
 package customer;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -45,15 +46,21 @@ public class custloginchek extends HttpServlet {
 		
 		String u=request.getParameter("name");
 		String p=request.getParameter("psw");
-	     Dao_Customer m=new Dao_Customer();
-	     
+		String ip=request.getRemoteAddr();
+		// PrintWriter out = response.getWriter();
+		Dao_Customer m=new Dao_Customer();
+	  //   out.println(ip);
+	     System.out.print(ip);
 	     int x=m.logincheck(u, p);
-		if(x==1)
+	     int y= m.cartupdate(u, ip);
+	     System.out.print("/n"+y);
+
+		if(x==1 && y==1)
 		{
 		   //Session code here
 			HttpSession session=request.getSession();
 			session.setAttribute("uid",u);
-			response.sendRedirect("index1.jsp");
+			response.sendRedirect("index.jsp");
 			
 		}
 		else {

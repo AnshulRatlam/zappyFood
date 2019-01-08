@@ -141,9 +141,9 @@
                                                     <a href="#">
                                                         <span class="cart_icon_inner">
                                                             <i class="ion-android-cart"></i>
-                                                            <span class="cart_count">2</span>
+                                                            <span class="cart_count">${count}</span>
                                                         </span>
-                                                        <span class="item_total">$65.00</span>
+                                                        <span class="item_total">rs</span>
                                                     </a>
                                                 </div>
                                                 <!--Mini Cart Box-->

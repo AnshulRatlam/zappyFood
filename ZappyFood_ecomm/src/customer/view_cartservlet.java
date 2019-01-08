@@ -46,7 +46,10 @@ public class view_cartservlet extends HttpServlet {
 			user=request.getRemoteAddr();
 		}
 		
-            			
+		int count;
+		count=m.cartcount(user);
+		
+		request.setAttribute("count", count);
 		  
 		  ArrayList<cart_bean> list= m.viewcart(user);
 
