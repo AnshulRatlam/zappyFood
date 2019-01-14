@@ -238,6 +238,37 @@ public class my_dao {
     	 }
     		return y;
     	}
+	 public String checkproductname(String name)
+	 {
+	 	String msg=null;
+	 	
+	 	try
+	 	{	
+	 		int x=0;
+	 		Class.forName("com.mysql.jdbc.Driver");
+	 		Connection con = Start();
+			
+			PreparedStatement ps=con.prepareStatement("SELECT  * FROM itemcollection WHERE Product_Name = ?");
+			ps.setString(1, name);
+			
+	 		ResultSet rs = ps.executeQuery();
+	 		while(rs.next())
+	 		{
+	 			x=1;
+	 		}
+	 		if(x==1)
+	 			msg="<font color=red>This Email Already Exist</font>";
+	 		else
+	 			msg="<font color=green>Avaliable</font>";
+	 	}
+	 	catch(Exception e)
+	 	{
+	 		System.out.println(e);
+	 	}
+	 	
+	      return msg;
+	 }
+
     
 
 	public static void main(String[] args) {

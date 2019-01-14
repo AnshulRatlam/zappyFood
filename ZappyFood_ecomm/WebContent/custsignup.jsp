@@ -59,7 +59,7 @@ if (m1!=null)
                                         <div class="col-lg-6 col-sm-6 col-md-6">
                                             <div class="input_text">
 												<label for="R_N4">Email Address <span>*</span></label>
-												<input name="email" id="R_N4" type="text"> 
+												<input name="email" id="R_N4" type="text"><span id='msg'></span> 
 											</div>   
                                         </div>
                                          <div class="col-lg-6 col-sm-6 col-md-6">
@@ -117,7 +117,30 @@ if (m1!=null)
 <%@include file="custfooter.jsp"  %>
 
 
-
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#R_N4").blur(function(){
+	    
+		var email=$("#R_N4").val();
+		//alert(email);
+	var	mydata="id="+email;
+		
+	 $("#msg").html("<img src='assets/img/pc.gif' height='50' width='50' ><font color=gray> Checking availability...</font>");
+	 
+	 $.ajax({
+			url:'CheckEmail',
+			data:mydata,
+			type:'post',
+			success:function(response){
+			//	alert(response);
+				$("#msg").html(response);
+				if(response.includes("Already Exist"))
+				$("#R_N4").val("");
+			}
+		 });
+	});
+});
+</script>
 
 </body>
 </html>

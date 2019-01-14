@@ -201,7 +201,33 @@ public class Dao_Customer {
 	    		  ps.setInt(2,v.getQuantity());
 	    		  ps.setString(3, v.getUser());
 	  
+	 
+	    		    y=ps.executeUpdate();
 	    		    
+	    		    
+	    		    con.close();
+	    	 }catch(Exception e)
+	    	 {
+	    		  System.out.println(e);
+	    	 }
+	    		return y;
+	    	}
+	  
+	  public int updateAddtocart(view_cart v)
+	     {
+	    	 int y=0;
+	    	 try {
+	    		    Class.forName("com.mysql.jdbc.Driver");
+	    			Connection	 con=DriverManager.getConnection("jdbc:mysql://localhost:3306/foodecom","root","root");
+
+	    		
+	    			
+	    		  PreparedStatement ps=con.prepareStatement("update view_cart set quantity=quantity+? where user=? and pid=?");//placeholder
+	    		  ps.setInt(3, v.getPid()); 
+	    		  ps.setInt(1,v.getQuantity());
+	    		  ps.setString(2, v.getUser());
+	  
+	    		  
 	    		    
 	    		    y=ps.executeUpdate();
 	    		    
@@ -213,6 +239,32 @@ public class Dao_Customer {
 	    	 }
 	    		return y;
 	    	}
+	  
+	
+	  public int quantityCheck(String id , String user)	 
+		{
+			int x=0;
+		
+			try {
+				
+				Connection con =Start(); 
+				// prepared Statement
+				PreparedStatement ps = con.prepareStatement("Select * from view_cart where pid=? and user=?");
+				ps.setInt(1, Integer.parseInt(id));
+				ps.setString(2, user);
+				
+			//	System.out.println(ps);
+				ResultSet rs=ps.executeQuery();
+	             x=0;
+				if(rs.next())
+	           x=1;
+		}catch(Exception e)
+			{
+			System.out.println(e);
+			}
+			return x;
+		}
+	  
 	  public ArrayList<cart_bean>  viewcart(String user)
 		{
 			ArrayList<cart_bean> list=new ArrayList<>();
@@ -220,7 +272,7 @@ public class Dao_Customer {
 			try {
 				Connection con = Start();
 				
-				PreparedStatement ps=con.prepareStatement("SELECT i.image,v.quantity, i.Product_name, i.price FROM itemcollection i , view_cart v WHERE v.pid=i.Sno And v.user= ?");
+				PreparedStatement ps=con.prepareStatement("SELECT v.cid,i.image,v.quantity, i.Product_name, i.price FROM itemcollection i , view_cart v WHERE v.pid=i.Sno And v.user= ?");
 				ps.setString(1, user);
 				ResultSet rs=ps.executeQuery();
 				
@@ -229,11 +281,11 @@ public class Dao_Customer {
 				{ 
 					cart_bean e=new cart_bean();
 					
-					
-					e.setFilename(rs.getString(1));
-					e.setQuantity(rs.getInt(2));
-					e.setProductname(rs.getString(3));
-					e.setProductprice(rs.getDouble(4));
+					e.setCartid(rs.getInt(1));
+					e.setFilename(rs.getString(2));
+					e.setQuantity(rs.getInt(3));
+					e.setProductname(rs.getString(4));
+					e.setProductprice(rs.getDouble(5));
 					
 					list.add(e);
 			     }
@@ -262,7 +314,7 @@ public class Dao_Customer {
 				
 				if(rs.next())
 				{ 
-				     e.setTotal(rs.getInt("Sum(v.quantity*i.price)"));
+				     e.setTotal(rs.getInt(1));
 					 list.add(e);
 			     }
 				
@@ -275,6 +327,33 @@ public class Dao_Customer {
 		 return  list;
 		 
 		}
+	  public int  gtot(String user)
+			{
+				int gtot=0;
+				
+				 try {
+					Connection con = Start();
+					
+					PreparedStatement ps=con.prepareStatement("SELECT Sum(v.quantity*i.price) FROM itemcollection i , view_cart v WHERE v.pid=i.Sno And v.user= ?");
+					ps.setString(1, user);
+					ResultSet rs=ps.executeQuery();
+						
+					
+					if(rs.next())
+					{ 
+					    gtot= rs.getInt(1);
+						
+				     }
+					
+					
+					con.close();
+				}catch( SQLException w)
+					{
+					  System.out.println(w);
+					}
+			 return  gtot;
+			 
+			}
 	  public int cartcount(String user)
 	  {
 		  int count=0;
@@ -290,7 +369,7 @@ public class Dao_Customer {
 				
 				if(rs.next())
 				{ 
-				    count=(rs.getInt("COUNT(*)"));
+				    count=(rs.getInt(1));
 					 
 			     }
 				
@@ -316,7 +395,7 @@ public class Dao_Customer {
 				ps.setString(1, user);
 				ps.setString(2, IP);
 				x=ps.executeUpdate();
-				System.out.println(ps);
+				//System.out.println(ps);
 				con.close();
 			}catch( SQLException w)
 				{
@@ -356,6 +435,89 @@ public class Dao_Customer {
 		return list2;
 		 
 	 }
+	 
+	 public String checkEmail(String email)
+	 {
+	 	String msg=null;
+	 	
+	 	try
+	 	{	
+	 		int x=0;
+	 		Class.forName("com.mysql.jdbc.Driver");
+	 		Connection con = Start();
+			
+			PreparedStatement ps=con.prepareStatement("SELECT  * FROM cust_signup WHERE email = ?");
+			ps.setString(1, email);
+			
+	 		ResultSet rs = ps.executeQuery();
+	 		while(rs.next())
+	 		{
+	 			x=1;
+	 		}
+	 		if(x==1)
+	 			msg="<font color=red>This Email Already Exist</font>";
+	 		else
+	 			msg="<font color=green>Avaliable</font>";
+	 	}
+	 	catch(Exception e)
+	 	{
+	 		System.out.println(e);
+	 	}
+	 	
+	      return msg;
+	 }
+	 public int updatecart(cart_bean c)
+     {
+    	 int y=0;
+    	 try {
+    		 Class.forName("com.mysql.jdbc.Driver");
+ 	 		Connection con = Start();
+ 			
+    		
+    			
+    		  PreparedStatement ps=con.prepareStatement("update view_cart set quantity=? where cid = ?");//placeholder
+    		  
+    		  ps.setInt(1, c.getQuantity()); 
+    		  ps.setInt(2,c.getCartid());
+    		   
+    		    
+    		    y=ps.executeUpdate();
+    		    
+    		    
+    		    con.close();
+    	 }catch(Exception e)
+    	 {
+    		  System.out.println(e);
+    	 }
+    		return y;
+    	}
+	 public int updatecart(String cid, String quan)
+     {
+    	 int y=0;
+    	 try {
+    		    Class.forName("com.mysql.jdbc.Driver");
+    			Connection	 con=DriverManager.getConnection("jdbc:mysql://localhost:3306/foodecom","root","root");
+
+    		
+    			
+    		  PreparedStatement ps=con.prepareStatement("update view_cart set quantity=? where cid=? ");//placeholder
+    		  ps.setInt(1,Integer.parseInt(quan)); 
+    		  ps.setInt(2,Integer.parseInt(cid));
+  
+    		  System.out.println(ps);
+    		    
+    		    y=ps.executeUpdate();
+    		    
+    		    
+    		    con.close();
+    	 }catch(Exception e)
+    	 {
+    		  System.out.println(e);
+    	 }
+    		return y;
+    	}
+
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 

@@ -5,8 +5,14 @@ public class cart_bean {
 	
 	String  productname ,filename,user;
 	
-	int Sno,quantity,total;
+	int Sno,quantity,total,cartid;
 	
+	public int getCartid() {
+		return cartid;
+	}
+	public void setCartid(int cartid) {
+		this.cartid = cartid;
+	}
 	public int getTotal() {
 		return total;
 	}

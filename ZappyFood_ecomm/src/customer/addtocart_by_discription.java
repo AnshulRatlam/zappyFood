@@ -63,7 +63,18 @@ public class addtocart_by_discription extends HttpServlet {
 		 	b.setPid(Integer.parseInt(pid));
 			b.setQuantity(Integer.parseInt(quantity));
 			b.setUser(user);
-			int x= m.Addtocart(b);
+			int y = m.quantityCheck(pid, user);
+			int x = 0;
+			
+			 if(y==1)
+		     {
+			   m.updateAddtocart(b);
+		     }	
+			 if(y==0)
+			 {
+			 x= m.Addtocart(b);
+			 }
+			
 			 //RequestDispatcher rd=request.getRequestDispatcher("index1.jsp");
 				
 			
@@ -77,7 +88,7 @@ public class addtocart_by_discription extends HttpServlet {
 				  
 				 
 			      
-			   if(x==1)
+			   if(x==1 || y==1)
 			   {
 				   request.setAttribute("msg", "item add Successfully...");
 			   }

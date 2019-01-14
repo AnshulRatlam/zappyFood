@@ -72,28 +72,47 @@ ON view_cart.pid=itemcollection.Sno WHERE view_cart.user= 'the';
                                             </tr>
                                         </thead>
                                          <% 
+                                         int i=0;
                                                       for(cart_bean ee:list)
 														   {
+                                                    	      
 															  %>
                                         <tbody>
                                             <tr>
                                                 <td class="product-thumbnail"><img src="imgupload/<%=ee.getFilename()%>" style="width:50%" alt=""></td>
                                                 <td class="product-name"><a href="#"><%=ee.getProductname() %></a></td>
-                                                <td class="product-price"><span class="amount"><%=ee.getProductprice() %></span></td>
-                                                <td class="product-quantity">
+                                                <td class="product-price"><span  class="amount"><input type="text" id="amountid<%=i%>" value=<%=ee.getProductprice() %> readonly></span></td>
+                                         
+                                         <td class="product-quantity">
                                                     <div class="quickview_plus_minus quick_cart">
                                                         <div class="quickview_plus_minus_inner">
                                                             <div class="cart-plus-minus cart_page">
-                                                                <input type="text" value=<%=ee.getQuantity() %> name="quantity" class="cart-plus-minus-box">
-                                                            </div>
+                                                                <input type="hidden" id="cartid<%=i%>" value=<%=ee.getCartid()%>>
+                                                                <input type="text" id="Quantityid<%=i%>" onkeyup="updatequantity(<%=i%>)" value=<%=ee.getQuantity() %> name="quantity" class="cart-plus-minus-box" >
+                                                           </div>
                                                         </div>    
                                                     </div> 
                                                 </td>
-                                                <td class="product-subtotal"><%=ee.getProductprice()*ee.getQuantity()%></td>
+                                         <%-- 
+                                                <td class="product-quantity">
+                                                    <div class="quickview_plus_minus_inner">
+                                                      <div class="cart-plus-minus">
+                                                      <div class="dec qtybutton">-</div>
+                                                            <div >
+                                                                <input type="hidden" id="cartid<%=i%>" value=<%=ee.getCartid()%>>
+                                                                <input type="text" id="Quantityid<%=i%>" onkeyup="updatequantity(<%=i%>)" value=<%=ee.getQuantity() %> name="quantity" class="cart-plus-minus-box" >
+                                                            </div>
+                                                            <div onclick="updatequantity(<%=i%>)" class="inc qtybutton">+</div></div>
+                                                        </div>    
+                                                    </div> 
+                                                </td>
+                                               --%>  
+                                                <td class="product-subtotal" ><input  id="total<%=i%>" value=<%=ee.getProductprice()*ee.getQuantity()%> name="total" readonly></td>
                                                 <td class="product-remove"><a href="#">X</a></td>
                                             </tr>
                                         </tbody>
-                                              <%} %>                  
+                                              <% i++;
+                                              } %>                  
                                     </table>
                                 </div>
                                 <div class="row table-responsive_bottom">
@@ -119,7 +138,7 @@ ON view_cart.pid=itemcollection.Sno WHERE view_cart.user= 'the';
                                             
                                             <div class="order-total">
                                                 <span><strong>Total</strong> </span>          
-                                                <span><strong><%=ee.getTotal() %></strong> </span>
+                                               <div id="gtot"> <span> <strong ><%=ee.getTotal() %></strong> </span></div>
                                             </div>
                                             <%} %>
                                             <div class="wc-proceed-to-checkout">
@@ -137,6 +156,25 @@ ON view_cart.pid=itemcollection.Sno WHERE view_cart.user= 'the';
 
 <%@include file="custfooter.jsp" %>
 
+<script >
+function updatequantity(i)
+{
+			var cid = document.getElementById('cartid'+i).value;
+			var quan = document.getElementById('Quantityid'+i).value;
+			var pri = document.getElementById('amountid'+i).value;
+			document.getElementById('total'+i).value=pri*quan;
+			
+			var xhttp = new XMLHttpRequest();
+			xhttp.open("POST","UpdateViewCart?cid="+cid+"&q="+quan,true);
+			xhttp.send();
+			xhttp.onreadystatechange  = function () {
+				if (this.readyState == 4 && this.status==200){
+					document.getElementById("gtot").innerHTML=this.responseText;
+				}
+			};
+	}
 
+
+</script>
 </body>
 </html>

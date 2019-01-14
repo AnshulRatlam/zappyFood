@@ -45,10 +45,12 @@ public class addtocart extends HttpServlet {
 		String user = (String)session.getAttribute("uid");
 		PrintWriter out=response.getWriter();
       view_cart b = new view_cart();
-		
+		int x =0;
 		
 		Dao_Customer m = new Dao_Customer();
 		
+		
+			
 		
 		 if(user==null)
 		{
@@ -64,11 +66,21 @@ public class addtocart extends HttpServlet {
 		 	b.setPid(Integer.parseInt(pid));
 			b.setQuantity(Integer.parseInt(quantity));
 			b.setUser(user);
-			int x= m.Addtocart(b);
-			 //RequestDispatcher rd=request.getRequestDispatcher("index1.jsp");
-				
-				  
-				  
+			
+			int y = m.quantityCheck(pid, user);
+			
+			
+			 if(y==1)
+		     {
+			   m.updateAddtocart(b);
+		     }	
+			 if(y==0)
+			 {
+			x= m.Addtocart(b);
+			 }
+			
+			 //RequestDispatcher rd=request.getRequestDispatcher("index1.jsp");	
+	      
 				  ArrayList<MY_BEAN> list1= m.viewproductreadytocook();
 
 			     request.setAttribute("LIST1", list1);
@@ -82,10 +94,12 @@ public class addtocart extends HttpServlet {
 			      RequestDispatcher rd3=request.getRequestDispatcher("Custindex.jsp");
 			     request.setAttribute("LIST3", list3);
 			      
-			   if(x==1)
+			   if(x==1 || y==1)
 			   {
 				   request.setAttribute("msg", "item add Successfully...");
 			   }
+			  
+			  
 	             else
 		         {
 	            	 request.setAttribute("msg", "Data Not Inserted Successfully...");

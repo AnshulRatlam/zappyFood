@@ -66,6 +66,7 @@ if (m!=null)
 									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
 									<input type="text" class="form-control" name="pname"  id="name"  placeholder="Enter your Name"/>
 								</div>
+								 <span id="msg"></span>
 							</div>
 						</div>
 
@@ -75,6 +76,7 @@ if (m!=null)
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
 									<input type="text" class="form-control" name="price" id="email"  placeholder="Enter price"/>
+								   
 								</div>
 							</div>
 						</div>
@@ -119,6 +121,30 @@ if (m!=null)
 		</div>
 
 
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#name").blur(function(){
+	    
+		var name=$("#name").val();
+		//alert(email);
+	var	mydata="id="+name;
+		
+	 $("#msg").html("<img src='assets/img/pc.gif' height='50' width='50' ><font color=gray> Checking availability...</font>");
+	 
+	 $.ajax({
+			url:'CheckProductName',
+			data:mydata,
+			type:'post',
+			success:function(response){
+			//	alert(response);
+				$("#msg").html(response);
+				if(response.includes("Already Exist"))
+				$("#name").val("");
+			}
+		 });
+	});
+});
+</script>
 
 
 
