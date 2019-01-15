@@ -1,7 +1,7 @@
 package customer;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,20 +11,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Bean.MY_BEAN;
+import Bean.cart_bean;
 import dao.Dao_Customer;
 import dao.my_dao;
 
 /**
- * Servlet implementation class custloginchek
+ * Servlet implementation class checkServlet
  */
-@WebServlet("/custloginchek")
-public class custloginchek extends HttpServlet {
+@WebServlet("/checkServlet")
+public class checkServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public custloginchek() {
+    public checkServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,7 +36,7 @@ public class custloginchek extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -43,35 +45,32 @@ public class custloginchek extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		
-		String u=request.getParameter("name");
-		String p=request.getParameter("psw");
-		String ip=request.getRemoteAddr();
-		// PrintWriter out = response.getWriter();
-		Dao_Customer m=new Dao_Customer();
-	  //   out.println(ip);
-	     //System.out.print(ip);
-	     int x=m.logincheck(u, p);
-	     int y= m.cartupdate(u, ip);
-	     
-
-		if(x==1 || y==1)
+		String Adress = request.getParameter("Adress");
+		HttpSession session = request.getSession();
+		String user = (String)session.getAttribute("uid");
+		Dao_Customer D = new Dao_Customer();
+		 
+	 	  
+		if (user==null)
 		{
-		   //Session code here
-			HttpSession session=request.getSession();
-			session.setAttribute("uid",u);
-			response.sendRedirect("index.jsp");
-			
+			//RequestDispatcher rd=request.getRequestDispatcher("login.jsp");
+			response.sendRedirect("login.jsp");
+			//rd.forward(request, response);
 		}
-		else {
-			RequestDispatcher rd=request.getRequestDispatcher("login.jsp");
-			request.setAttribute("msg","Login fail try again...");
-			rd.forward(request,response);
-			  //response.sendRedirect("index.jsp");
-		}
-		
-	}
-	
+		else
+		{
+		int z = D.gtot(user);
+		 ArrayList<cart_bean> list= D.Checkout(user,Adress,z);
+		  //	int delte = D.Deletecart(user);
+	 		//System.out.println(delte);
+	 	//	if(delte==1)
+	 	//	{
+	 	//		System.out.println("delete");	
+	 	//	}
+	 	  RequestDispatcher rd=request.getRequestDispatcher("ajaxtest.jsp");
+	 	 //  request.setAttribute("LIST", list);
+	 	  rd.forward(request, response);
 	}
 
-
+}
+}

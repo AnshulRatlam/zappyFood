@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
 
+import Admin.deleteProduct;
 import Bean.Bean_Customer;
 import Bean.MY_BEAN;
 import Bean.cart_bean;
@@ -516,8 +517,90 @@ public class Dao_Customer {
     	 }
     		return y;
     	}
+	 public ArrayList<cart_bean>  Checkout(String user,String Add,int total)
+		{
+			ArrayList<cart_bean> list=new ArrayList<>();
+			cart_bean e=new cart_bean();
+			
+			
+			 try {
+				Connection con = Start();
+				int y=0;
+				PreparedStatement ps=con.prepareStatement("SELECT pid,quantity,user from view_cart where user=?");
+				ps.setString(1, user);
+				ResultSet rs=ps.executeQuery();
+				//	System.out.println(ps);
+				while(rs.next())
+				{ 
+				 y=	insertOrder(rs.getInt("pid"),rs.getInt("quantity"),rs.getString("user"),Add,total);
+					
+				 
+				  
+				}
+				if(y==1)
+				{
+				Deletecart(user);
+				}
+				con.close();
+			}catch( SQLException w)
+				{
+				  System.out.println(w);
+				}
+		 return  list;
+		 
+		} 
+	 public int insertOrder(int pid, int quan, String user,String add,int total)
+	     {
+		 
+	    	 int y=0;
+	    	 try {
+	    		    Class.forName("com.mysql.jdbc.Driver");
+	    			//Connection	 con=DriverManager.getConnection("jdbc:mysql://localhost:3306/foodecom","root","root");
 
+	    		    Connection con = Start();
+	    			
+	    		  PreparedStatement ps=con.prepareStatement("insert into orderplace(pid,quantity,total,user,address) value(?,?,?,?,?)");
+	    		  ps.setInt(1, pid);
+	    		    ps.setLong(2,quan);
+	    		    ps.setLong(3,total);
+	    		    ps.setString(4, user);
+	    		    ps.setString(5,add);
+	    		  
+	    		   //ps.setString(6, B.getAdd());
+	    		 //   System.out.println(ps);
+	    		    y=ps.executeUpdate();
+	    		    
+	    		    
+	    		    con.close();
+	    	 }catch(Exception e)
+	    	 {
+	    		  System.out.println(e);
+	    	 }
+	    		return y;
+	    	}
+	 
+	 public int Deletecart(String user)
+     {
+    	 int y=0;
+    	 try {
+    		    //cart_bean c  = new cart_bean(); 
+    		    Class.forName("com.mysql.jdbc.Driver");
+    		//	Connection	 con=DriverManager.getConnection("jdbc:mysql://localhost:3306/foodecom","root","root");
 
+    		    Connection con = Start();
+    			
+    		  PreparedStatement ps=con.prepareStatement("delete from view_cart where user=?");
+    		  ps.setString(1,user);
+    		  y=ps.executeUpdate();
+    		  //System.out.println(ps);
+    		  con.close();
+    	 }catch(Exception e)
+    	 {
+    		  System.out.println(e);
+    	 }
+    		return y;
+   }
+	 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 

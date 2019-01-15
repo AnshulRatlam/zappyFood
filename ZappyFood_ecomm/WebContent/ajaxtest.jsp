@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@page import="java.sql.*" %>
+<%@page import="java.util.ArrayList,Bean.cart_bean" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,6 +11,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
+
+<h1>Sucess your order is place plese wait for</h1>
 <%-- 
 <form action="" method="get">
   quantity: <input type="Number" name="country" id='quantity' value="1" ><br>
@@ -52,7 +56,7 @@ $(document).ready(function(){
 	});
 });
 
-</script>--%>
+</script>
 
 
 <h1>Hello: <span style="color:red" id="showMyName"></span></h1>
@@ -77,7 +81,7 @@ $(document).ready(function(){
             });
         });
     });
-</script>
+</script>--%>
 <%-- 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -106,5 +110,37 @@ $(document).ready(function(){
 	});
 });
 </script>--%>
+
+
+
+
+<%--
+
+
+ <% 
+ ArrayList<cart_bean> list=(ArrayList<cart_bean>)request.getAttribute("LIST");
+ 
+ %>
+ 
+ <%
+   for(cart_bean ee:list)
+   {
+	  %>
+   	   pid: <input  value=<%=ee.getSno()%> ><br>
+  user: <input  value=<%=ee.getUser() %> readonly><br>
+  quantity: <input  value=<%=ee.getQuantity()  %>readonly><br> 
+   
+	 <%
+	 }
+  %>
+	 
+	  
+ --%>
+
+
+
+
+
+
 </body>
 </html>

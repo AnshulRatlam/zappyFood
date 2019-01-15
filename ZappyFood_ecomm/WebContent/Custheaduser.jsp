@@ -18,7 +18,7 @@
                                         <div class="menu">
                                             <nav>
                                                 <ul>
-                                                    <li class="active"><a href="index1.jsp">Home <i class="fa fa-angle-down"></i></a>
+                                                    <li class="active"><a href="index.jsp">Home <i class="fa fa-angle-down"></i></a>
                                                         <ul class="sub_menu">
                                                             <li><a href="Adminindex.jsp">Admin</a></li>
                                                             
