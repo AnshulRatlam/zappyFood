@@ -18,6 +18,8 @@ response.addHeader("expire", "0");
       <li class="active"><a href="Admin_panel.jsp">Home</a></li>
       <li><a href="productadd.jsp">Add Product</a></li>
       <li><a href="viewProduct">View Product Detail</a></li>
+       <li><a href="pendingserv">All Pending order</a></li>
+        <li><a href="vieworderhistory">order History</a></li>
       
     </ul>
     <ul class="nav navbar-nav navbar-right">

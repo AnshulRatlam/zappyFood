@@ -10,10 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Bean.MY_BEAN;
+
 import Bean.cart_bean;
 import dao.Dao_Customer;
-import dao.my_dao;
 
 /**
  * Servlet implementation class cartupdateservlet

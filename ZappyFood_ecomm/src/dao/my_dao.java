@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import Bean.MY_BEAN;
+import Bean.Order_Bean;
 
 
 public class my_dao {
@@ -270,7 +271,139 @@ public class my_dao {
 	 }
 
     
+	   public ArrayList<Order_Bean>  vieworder()
+			{
+				ArrayList<Order_Bean> list=new ArrayList<>();
+				try {
+					Connection con = Start();
+					
+					PreparedStatement ps=con.prepareStatement("select  * from orderplace order by oid desc");
+					ResultSet rs=ps.executeQuery();
+					while(rs.next())
+					{ 
+						
+						Order_Bean e=new Order_Bean();
+						e.setOid(rs.getInt("oid"));
+						e.setPid(rs.getInt("pid"));
+						e.setQuantity(rs.getInt("quantity"));
+						e.setPrice(rs.getInt("price"));
+						e.setUser(rs.getString("user"));;
+						e.setAddress(rs.getString("address"));
+						e.setStatus(rs.getInt("status"));
+						e.setDateo(rs.getString("Date"));
+						//System.out.println(e);
+						list.add(e);
+				     }
+					con.close();
+				}catch( SQLException w)
+					{
+					  System.out.println(w);
+					}
+			return list;
+				
+			}
+	   public ArrayList<Order_Bean>  vieworderpending()
+		{
+			ArrayList<Order_Bean> list=new ArrayList<>();
+			try {
+				Connection con = Start();
+				
+				PreparedStatement ps=con.prepareStatement("select  * from orderplace where status=0 order by oid desc");
+				ResultSet rs=ps.executeQuery();
+				while(rs.next())
+				{ 
+					
+					Order_Bean e=new Order_Bean();
+					e.setOid(rs.getInt("oid"));
+					e.setPid(rs.getInt("pid"));
+					e.setQuantity(rs.getInt("quantity"));
+					e.setPrice(rs.getInt("price"));
+					e.setUser(rs.getString("user"));;
+					e.setAddress(rs.getString("address"));
+					e.setStatus(rs.getInt("status"));
+					e.setDateo(rs.getString("Date"));
+					list.add(e);
+			     }
+				con.close();
+			}catch( SQLException w)
+				{
+				  System.out.println(w);
+				}
+		return list;
+			
+		}
+	   
+	   public int dispatch(int oid)
+	   {
+		   int y=0;
+  	 try {
+		    //cart_bean c  = new cart_bean(); 
+		    Class.forName("com.mysql.jdbc.Driver");
+		//	Connection	 con=DriverManager.getConnection("jdbc:mysql://localhost:3306/foodecom","root","root");
 
+		    Connection con = Start();
+			
+		  PreparedStatement ps=con.prepareStatement("Update orderplace set status=1  where oid=?");
+		  ps.setInt(1,oid);
+		  y=ps.executeUpdate();
+		  //System.out.println(ps);
+		  con.close();
+	 }catch(Exception e)
+	 {
+		  System.out.println(e);
+	 }
+		return y;
+	   }
+		public int notavlaible(int oid)
+		{int y=0;
+	  	 try {
+			    //cart_bean c  = new cart_bean(); 
+			    Class.forName("com.mysql.jdbc.Driver");
+			//	Connection	 con=DriverManager.getConnection("jdbc:mysql://localhost:3306/foodecom","root","root");
+
+			    Connection con = Start();
+				
+			  PreparedStatement ps=con.prepareStatement("Update orderplace set status=2  where oid=?");
+			  ps.setInt(1,oid);
+			  y=ps.executeUpdate();
+			  //System.out.println(ps);
+			  con.close();
+		 }catch(Exception e)
+		 {
+			  System.out.println(e);
+		 }
+			return y;
+		}
+		 public ArrayList<Order_Bean>  vieworderhistory()
+			{
+				ArrayList<Order_Bean> list=new ArrayList<>();
+				try {
+					Connection con = Start();
+					
+					PreparedStatement ps=con.prepareStatement("select  * from orderplace where status!=0");
+					ResultSet rs=ps.executeQuery();
+					while(rs.next())
+					{ 
+						
+						Order_Bean e=new Order_Bean();
+						e.setOid(rs.getInt("oid"));
+						e.setPid(rs.getInt("pid"));
+						e.setQuantity(rs.getInt("quantity"));
+						e.setPrice(rs.getInt("price"));
+						e.setUser(rs.getString("user"));;
+						e.setAddress(rs.getString("address"));
+						e.setStatus(rs.getInt("status"));
+						
+						list.add(e);
+				     }
+					con.close();
+				}catch( SQLException w)
+					{
+					  System.out.println(w);
+					}
+			return list;
+				
+			}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 

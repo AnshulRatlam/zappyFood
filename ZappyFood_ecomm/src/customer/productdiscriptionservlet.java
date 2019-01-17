@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import Bean.MY_BEAN;
 import dao.Dao_Customer;
-import dao.my_dao;
+
 
 /**
  * Servlet implementation class productdiscriptionservlet

@@ -1,7 +1,7 @@
 package Admin;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+//import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -42,7 +42,7 @@ public class UploadProductservlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		PrintWriter out=response.getWriter();
+		//PrintWriter out=response.getWriter();
 		String pid=request.getParameter("pid");
 		String productname=request.getParameter("pname");
 		String productprice=request.getParameter("price");

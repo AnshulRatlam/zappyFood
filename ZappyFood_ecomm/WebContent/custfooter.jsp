@@ -1,13 +1,13 @@
   <!-- footer start -->
                 <footer class="footer pt-90">
-                    <div class="container-fluid">
+                    <div class="container-fluid bg-light" >
                         <div class="row">
                             <div class="col-lg-3 col-md-12 col-xs-12">
                                 <!--Single Footer-->
                                 <div class="single_footer widget">
                                     <div class="single_footer_widget_inner">
                                         <div class="footer_logo">
-                                            <a href="#"><img src="assets/img/logo/logo_footer.png" alt=""></a>
+                                            <a href="index.jsp"><img src="assets\img\zappy-logo.png" alt="logo" width="50%"></a>
                                         </div>
                                         <div class="footer_content">
                                         
@@ -45,7 +45,6 @@
                                                 <ul>
                                                     <li><a href="#">Prices drop</a></li>
                                                     <li><a href="#"> New products</a></li>
-                                                    <li><a href="#"> Best sales</a></li>
                                                     <li><a href="#"> Contact us</a></li>
                                                     <li><a href="#"> My account</a></li>
                                                 </ul>
@@ -57,13 +56,10 @@
                                     <div class="single_footer widget">
                                         <div class="single_footer_widget_inner">   
                                             <div class="footer_title">
-                                                <h2>Login</h2>
+                                                <h2>More</h2>
                                             </div>
                                             <div class="footer_menu">
                                                 <ul>
-                                                    <li><a href="#">Sitemap</a></li>
-                                                    <li><a href="#"> Stores</a></li>
-                                                    <li><a href="#"> Login</a></li>
                                                     <li><a href="#"> Contact us</a></li>
                                                     <li><a href="#"> My account</a></li>
                                                 </ul>
@@ -81,9 +77,7 @@
                                                 <ul>
                                                     <li><a href="#">Personal info</a></li>
                                                     <li><a href="#"> Orders</a></li>
-                                                    <li><a href="#"> Login</a></li>
-                                                    <li><a href="#"> Credit slips</a></li>
-                                                    <li><a href="#"> Addresses</a></li>
+                                                     <li><a href="#"> Addresses</a></li>
                                                 </ul> 
                                             </div>
                                         </div>
@@ -109,22 +103,7 @@
                         </div>
                     </div>
                     
-                    <div class="copyright">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-xs-12">
-                                    <div class="copyright_text">
-                                        <p>Copyright 2019 <a href="#">Zappy Food</a>. All Rights Reserved</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-xs-12">
-                                    <div class="footer_mastercard text-right">
-                                        <a href="#"><img src="assets/img/brand/payment.png" alt=""></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                     
                 </footer>
                 

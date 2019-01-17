@@ -6,12 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
-import javax.servlet.http.HttpSession;
-
-import Admin.deleteProduct;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import Bean.Bean_Customer;
 import Bean.MY_BEAN;
+import Bean.Order_Bean;
 import Bean.cart_bean;
 import Bean.view_cart;
 
@@ -517,22 +516,22 @@ public class Dao_Customer {
     	 }
     		return y;
     	}
-	 public ArrayList<cart_bean>  Checkout(String user,String Add,int total)
+	 public ArrayList<cart_bean>  Checkout(String user,String Add)
 		{
 			ArrayList<cart_bean> list=new ArrayList<>();
-			cart_bean e=new cart_bean();
+			//cart_bean e=new cart_bean();
 			
 			
 			 try {
 				Connection con = Start();
 				int y=0;
-				PreparedStatement ps=con.prepareStatement("SELECT pid,quantity,user from view_cart where user=?");
+				PreparedStatement ps=con.prepareStatement("SELECT v.pid,v.quantity,v.user, i.price FROM itemcollection i , view_cart v where v.pid=i.Sno And user=?");
 				ps.setString(1, user);
 				ResultSet rs=ps.executeQuery();
 				//	System.out.println(ps);
 				while(rs.next())
 				{ 
-				 y=	insertOrder(rs.getInt("pid"),rs.getInt("quantity"),rs.getString("user"),Add,total);
+				 y=	insertOrder(rs.getInt(1),rs.getInt(2),rs.getString(3),Add,rs.getInt(4));
 					
 				 
 				  
@@ -549,25 +548,28 @@ public class Dao_Customer {
 		 return  list;
 		 
 		} 
-	 public int insertOrder(int pid, int quan, String user,String add,int total)
+	 public int insertOrder(int pid, int quan, String user,String add,int price)
 	     {
 		 
 	    	 int y=0;
 	    	 try {
 	    		    Class.forName("com.mysql.jdbc.Driver");
 	    			//Connection	 con=DriverManager.getConnection("jdbc:mysql://localhost:3306/foodecom","root","root");
-
+	    		    Date myDate = new Date();
+	    		    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd-HH:mm:ss");
+	    		    String myDateString = sdf.format(myDate);
+	    		    
 	    		    Connection con = Start();
-	    			
-	    		  PreparedStatement ps=con.prepareStatement("insert into orderplace(pid,quantity,total,user,address) value(?,?,?,?,?)");
+	    			//Order_Bean o = new Order_Bean();
+	    		  PreparedStatement ps=con.prepareStatement("insert into orderplace(pid,quantity,price,user,address,Date) value(?,?,?,?,?,?)");
 	    		  ps.setInt(1, pid);
 	    		    ps.setLong(2,quan);
-	    		    ps.setLong(3,total);
+	    		    ps.setLong(3,price);
 	    		    ps.setString(4, user);
 	    		    ps.setString(5,add);
-	    		  
+	    		   ps.setString(6, myDateString);
 	    		   //ps.setString(6, B.getAdd());
-	    		 //   System.out.println(ps);
+	    		//   System.out.println(ps);
 	    		    y=ps.executeUpdate();
 	    		    
 	    		    
@@ -600,6 +602,57 @@ public class Dao_Customer {
     	 }
     		return y;
    }
+	 
+	 public int deletecartitem(int cid)
+	{
+         int x=0;
+		
+		try {
+			
+			Connection con= Start();
+			PreparedStatement ps=con.prepareStatement("delete from view_cart where cid=?");
+			ps.setInt(1,cid);
+			x= ps.executeUpdate();
+	       con.close();
+		}catch( SQLException w)
+			{
+			  System.out.println(w);
+			}
+		
+		return x;
+	}
+	 public ArrayList<Order_Bean>  vieworderuser(String u )
+		{
+			ArrayList<Order_Bean> list=new ArrayList<>();
+			try {
+				Connection con = Start();
+				
+				PreparedStatement ps=con.prepareStatement("select  * from orderplace where user=? order by oid desc");
+				ps.setString(1, u);
+				ResultSet rs=ps.executeQuery();
+				while(rs.next())
+				{ 
+					
+					Order_Bean e=new Order_Bean();
+					e.setOid(rs.getInt("oid"));
+					e.setPid(rs.getInt("pid"));
+					e.setQuantity(rs.getInt("quantity"));
+					e.setPrice(rs.getInt("price"));
+					e.setUser(rs.getString("user"));;
+					e.setAddress(rs.getString("address"));
+					e.setStatus(rs.getInt("status"));
+					e.setDateo(rs.getString("Date"));
+				//	System.out.println(e);
+					list.add(e);
+			     }
+				con.close();
+			}catch( SQLException w)
+				{
+				  System.out.println(w);
+				}
+		return list;
+			
+		}
 	 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

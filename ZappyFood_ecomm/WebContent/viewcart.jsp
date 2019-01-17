@@ -43,7 +43,15 @@ ON view_cart.pid=itemcollection.Sno WHERE view_cart.user= 'the';
         <%} %>
 
 
-
+<% if (m!=null)
+{
+	%> 
+                
+	<div class="alert alert-success alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong><%= m %></strong> 
+  </div>
+	<%} %>
 
 
  <div class="cart_main_area">
@@ -94,22 +102,9 @@ ON view_cart.pid=itemcollection.Sno WHERE view_cart.user= 'the';
                                                         </div>    
                                                     </div> 
                                                 </td>
-                                         <%-- 
-                                                <td class="product-quantity">
-                                                    <div class="quickview_plus_minus_inner">
-                                                      <div class="cart-plus-minus">
-                                                      <div class="dec qtybutton">-</div>
-                                                            <div >
-                                                                <input type="hidden" id="cartid<%=i%>" value=<%=ee.getCartid()%>>
-                                                                <input type="text" id="Quantityid<%=i%>" onkeyup="updatequantity(<%=i%>)" value=<%=ee.getQuantity() %> name="quantity" class="cart-plus-minus-box" >
-                                                            </div>
-                                                            <div onclick="updatequantity(<%=i%>)" class="inc qtybutton">+</div></div>
-                                                        </div>    
-                                                    </div> 
-                                                </td>
-                                               --%>  
+                                       
                                                 <td class="product-subtotal" ><input  id="total<%=i%>" value=<%=ee.getProductprice()*ee.getQuantity()%> name="total" readonly></td>
-                                                <td class="product-remove"><a href="#">X</a></td>
+                                                <td class="product-remove"><a href="dleteccartitem?pid=<%=ee.getCartid()%>">X</a></td>
                                             </tr>
                                         </tbody>
                                               <% i++;
@@ -119,15 +114,10 @@ ON view_cart.pid=itemcollection.Sno WHERE view_cart.user= 'the';
                                 <div class="row table-responsive_bottom">
                                     <div class="col-lg-7 col-sm-7 col-md-7">
                                        <div class="buttons-carts">
-                                            <input value="Update Cart" type="submit"> 
-                                            <a href="#">Continue Shopping</a>   
+                                        
+                                            <a href="index.jsp">Continue Shopping</a>   
                                         </div> 
-                                        <div class="buttons-carts coupon">
-                                            <h3>Coupon</h3>
-                                            <p>Enter your coupon code if you have one.</p>
-                                            <input placeholder="Coupon code" type="text"> 
-                                            <input value="Apply Coupon" type="submit">     
-                                        </div>
+                                       
                                     </div> 
                                     <div class="col-lg-5 col-sm-5 col-md-5">
                                          <div class="cart_totals  text-right">
@@ -150,7 +140,7 @@ ON view_cart.pid=itemcollection.Sno WHERE view_cart.user= 'the';
                                               <textarea name="Adress" rows="" cols=""></textarea>
                                             </div>
                                             
-                                            <div class="wc-proceed-to-checkout">
+                                            <div class="buttons-carts">
                                           <%--   <a>  <input type="submit" value="" />proceed to Checkout</a>--%> 
                                            <input type="submit"  value="proceed to Checkout">
                                             </div>
@@ -158,12 +148,10 @@ ON view_cart.pid=itemcollection.Sno WHERE view_cart.user= 'the';
                                          </div>    
                                     </div>    
                                 </div>
-                             
+                            
                             
                         </div>    
-                    </div>    
-                </div>   
-            </div>
+                    
 
 <%@include file="custfooter.jsp" %>
 

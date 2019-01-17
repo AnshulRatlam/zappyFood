@@ -1,7 +1,7 @@
 package customer;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+//import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -73,7 +73,7 @@ public class custinsert extends HttpServlet {
 	        	 RequestDispatcher rd=request.getRequestDispatcher("custsignup.jsp");
                 request.setAttribute("msg", "Data Inserted Successfully...");
                rd.forward(request, response);
-                PrintWriter out=response.getWriter();
+              //  PrintWriter out=response.getWriter();
   		    	 
 	         
 	         }

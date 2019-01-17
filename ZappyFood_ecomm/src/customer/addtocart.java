@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import Bean.Bean_Customer;
 import Bean.MY_BEAN;
 import Bean.view_cart;
 import dao.Dao_Customer;
