@@ -91,7 +91,7 @@ ON view_cart.pid=itemcollection.Sno WHERE view_cart.user= 'the';
                                             <tr>
                                                 <td class="product-thumbnail"><img src="imgupload/<%=ee.getFilename()%>" style="width:50%" alt=""></td>
                                                 <td class="product-name"><a href="#"><%=ee.getProductname() %></a></td>
-                                                <td class="product-price"><span  class="amount"><input type="text" id="amountid<%=i%>" value=<%=ee.getProductprice() %> readonly></span></td>
+                                                <td class="product-price"><span  class="amount"><input class="form-control" type="text" id="amountid<%=i%>" value=<%=ee.getProductprice() %> readonly></span></td>
                                          
                                          <td class="product-quantity">
                                                     <div class="quickview_plus_minus quick_cart">
@@ -104,7 +104,7 @@ ON view_cart.pid=itemcollection.Sno WHERE view_cart.user= 'the';
                                                     </div> 
                                                 </td>
                                        
-                                                <td class="product-subtotal" ><input  id="total<%=i%>" value=<%=ee.getProductprice()*ee.getQuantity()%> name="total" readonly></td>
+                                                <td class="product-subtotal" ><input class="form-control" id="total<%=i%>" value=<%=ee.getProductprice()*ee.getQuantity()%> name="total" readonly></td>
                                                 <td class="product-remove"><a href="dleteccartitem?pid=<%=ee.getCartid()%>">X</a></td>
                                             </tr>
                                         </tbody>
@@ -138,7 +138,7 @@ ON view_cart.pid=itemcollection.Sno WHERE view_cart.user= 'the';
                                             
                                             <div class="order-total">
                                                 <span><strong>Adress</strong> </span> <br/>         
-                                              <textarea name="Adress" rows="" cols=""></textarea>
+                                              <textarea name="Adress" class="form-control" rows="3" id="comment"></textarea>
                                             </div>
                                             
                                             <div class="buttons-carts">
